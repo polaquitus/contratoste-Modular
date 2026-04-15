@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Contratos TA</title>
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Barra lateral -->
+    <aside class="sb">
+      <div class="sb-logo">
+        <div class="ico">C</div>
+        <div class="txt">Contratos TA<span>Gestión Contractual</span></div>
+      </div>
+      <nav class="sb-nav" id="mainNav"></nav>
+      <div class="sb-foot">
+        <button id="sbLogoutBtn" class="btn sb-logout" type="button" style="display:none">⎋ Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="mn">
+      <header class="tb">
+        <h1 id="pgT">📋 Contratos <span class="bc" id="buildTag"></span></h1>
+        <div class="tba" id="pgA"></div>
+      </header>
+      <div class="ct" id="appContainer">
+        <!-- Las vistas se cargan dinámicamente aquí -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast de notificaciones -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Modales globales -->
+  <div id="globalModalBack" class="modal-backdrop"></div>
+  <div id="globalModalBox" class="modal-box"></div>
+
+  <!-- Librerías externas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script>
+
+  <!-- Módulo principal de la aplicación -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
