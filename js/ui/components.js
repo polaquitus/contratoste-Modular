@@ -94,3 +94,8 @@ function setSBStatus(ok) {
   STATE.supabaseOK = ok;
   // TODO: Actualizar badge visual si existe
 }
+
+// Alias para bundle.js que llama initApp()
+function initApp(fromLogin) {
+  return APP.init(fromLogin);
+}
