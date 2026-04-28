@@ -2079,7 +2079,6 @@ const CAT_PILL = {mo:'mo',ipc:'ipc',ipim:'ipim',fuel:'fuel',usd:'usd'};
 
 // ── Storage ────────────────────────────────────────────────────────────
 // IDX_STORE = { [idxId]: { rows:[{ym,pct,confirmed,note,files:[{name,data}]}] } }
-let IDX_STORE = {};
 const IDX_OFFICIAL_SEED = {
   ipc_nac:[{ym:'2026-02',pct:2.9,value:null,publishedAt:'2026-03-12',source:'INDEC',sourceUrl:'https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-31',note:'IPC Nacional (nivel general) oficial INDEC'}],
   ipc_gba:[{ym:'2026-02',pct:2.6,value:null,publishedAt:'2026-03-12',source:'INDEC',sourceUrl:'https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-31',note:'IPC GBA (nivel general) oficial INDEC'}],

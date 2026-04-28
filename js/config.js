@@ -122,29 +122,23 @@ window.APP = {
 APP.init();
 
 // ═══════════════════════════════════════════════════════════════════
-// BRIDGE DE COMPATIBILIDAD - Para bundle.js original
+// ALIAS Y COMPATIBILIDAD - Para bundle.js original
 // ═══════════════════════════════════════════════════════════════════
 
-// Variables globales que bundle.js espera (sin window.)
-var DB = [];
-var ME2N = {};
-var IDX_STORE = {};
-var LICIT_DB = [];
-var PROV_DB = [];
-var SB_OK = false;
-var editId = null;
-var detId = null;
-var _idxSel = null;
-var files = [];
-var poDetOA = null;
+// Alias cortos apuntando a APP
+window.DATA = APP.data;
+window.STATE = APP.state;
+window.CONFIG = APP.config;
 
-// Sync con APP.data cuando se actualicen
-Object.defineProperty(window, 'DB', {
-  get: () => DATA.contratos,
-  set: (val) => { DATA.contratos = val; }
-});
-
-// Alias cortos para desarrollo
-const DATA = APP.data;
-const STATE = APP.state;
-const CONFIG = APP.config;
+// Variables globales simples que bundle.js usa
+window.DB = APP.data.contratos;
+window.ME2N = APP.data.me2n;
+window.IDX_STORE = APP.data.indices;
+window.LICIT_DB = APP.data.licitaciones;
+window.PROV_DB = APP.data.proveedores;
+window.SB_OK = false;
+window.editId = null;
+window.detId = null;
+window._idxSel = null;
+window.files = [];
+window.poDetOA = null;
