@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Contratos TA</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚡</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=221">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+</head>
+<body class="auth-locked">
+<div class="app">
+<aside class="sb">
+  <div class="sb-logo">
+    <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="te-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#EE3124;stop-opacity:1" />
+          <stop offset="30%" style="stop-color:#FF6900;stop-opacity:1" />
+          <stop offset="60%" style="stop-color:#00A88F;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#005EB8;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="50" r="45" fill="url(#te-grad)" opacity="0.15"/>
+      <path d="M30,40 Q50,20 70,40 T90,60" stroke="url(#te-grad)" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <circle cx="50" cy="50" r="8" fill="#fff"/>
+    </svg>
+    <div class="txt">Contratos TA<span>Gestión Contractual</span></div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-sec">Módulos</div>
+    <a class="nv act" data-mod="list" onclick="go('list')" href="#"><span class="ni">📋</span><span>Contratos</span><span class="badge" id="cnt">0</span></a>
+    <a class="nv" data-mod="form" onclick="go('form')" href="#"><span class="ni">➕</span><span>Nuevo Contrato</span></a>
+    <a class="nv" data-mod="me2n" onclick="go('me2n')" href="#"><span class="ni">🛒</span><span>Purchase Orders</span><span class="badge" id="poCnt">0</span></a>
+    <div class="sb-sec" style="margin-top:18px">Módulos adicionales</div>
+    <a class="nv" data-mod="idx" onclick="go('idx')" href="#"><span class="ni">📊</span><span>Índices</span></a>
+    <a class="nv" data-mod="licit" onclick="go('licit')" href="#"><span class="ni">📋</span><span>Licitaciones</span></a>
+    <a class="nv" data-mod="prov" onclick="go('prov')" href="#"><span class="ni">🏢</span><span>Proveedores</span><span class="badge" id="provCnt">0</span></a>
+  </nav>
+ <div class="sb-foot"><button id="sbLogoutBtn" class="btn sb-logout" type="button" style="display:none" onclick="logoutApp()">⎋ Cerrar sesión</button></div>
+</aside>
+<main class="mn">
+<header class="tb"><h1 id="pgT">📋 Contratos <span class="bc" id="buildTag">v0.221</span></h1><div class="tba" id="pgA"><button class="btn btn-p" onclick="go('form')">➕ Nuevo Contrato</button></div></header>
+<div class="ct">
+
+<!-- LIST -->
+<div id="vList" class="vw on">
+  <div class="card">
+    <div class="thdr"><h2>Contratos Registrados</h2><span class="tcnt" id="lcnt">0</span></div>
+    <div class="tfl">
+      <input type="text" id="fSrch" placeholder="Buscar N° contrato o proveedor..." oninput="renderList()" style="flex:1;max-width:240px">
+      <select id="fEst" onchange="renderList()"><option value="">Todos</option><option value="ACTIVO">Activos</option><option value="VENCIDO">Vencidos</option></select>
+      <select id="fAsset" onchange="renderList()" style="max-width:120px"><option value="">Asset</option><option>NQN</option><option>TDF</option><option>NQN + TDF</option></select>
+      <select id="fDom" onchange="renderList()" style="max-width:120px"><option value="">Dominio</option><option value="B&GS">B&GS</option><option value="EDL">EDL</option><option value="P&P">P&P</option><option value="HSE">HSE</option><option value="FIN">FIN</option><option value="HR">HR</option><option value="IT">IT</option><option value="LEGAL">LEGAL</option><option value="OPS">OPS</option><option value="OTHER">OTHER</option></select>
+      <select id="fResp" onchange="renderList()" style="max-width:180px"><option value="">Responsable</option><option value="Adrian OBINO">Adrian OBINO</option><option value="Alejo Nicolas CORDOBA">Alejo Nicolas CORDOBA</option><option value="Ana Chiquinquira LEAÑEZ PERNALETE">Ana Chiquinquira LEAÑEZ PERNALETE</option><option value="Astrid Belen TERRIZZANO">Astrid Belen TERRIZZANO</option><option value="Barbara Camila ALVAREZ OYARZO">Barbara Camila ALVAREZ OYARZO</option><option value="Emilio Sebastian SAPORITO">Emilio Sebastian SAPORITO</option><option value="Eugenia FERNANDEZ BOTTARO">Eugenia FERNANDEZ BOTTARO</option><option value="Eugenia FERNANDEZ PUENTE">Eugenia FERNANDEZ PUENTE</option><option value="Fabiana Alejandra DI TATA">Fabiana Alejandra DI TATA</option><option value="Federico Claudio VAZQUEZ FERNANDEZ">Federico Claudio VAZQUEZ FERNANDEZ</option><option value="Fernando Javier PUENTES GALLY">Fernando Javier PUENTES GALLY</option><option value="Flavia SEGOVIA">Flavia SEGOVIA</option><option value="Francisco Javier CACERES DIAZ">Francisco Javier CACERES DIAZ</option><option value="Gaston CORSO">Gaston CORSO</option><option value="Joaquin DELLA VEDOVA">Joaquin DELLA VEDOVA</option><option value="Maria Silvia TRAVERSO">Maria Silvia TRAVERSO</option><option value="Maria Sol LEONARDIS">Maria Sol LEONARDIS</option><option value="Martín ZALAZAR">Martín ZALAZAR</option><option value="Mauro ELIAS">Mauro ELIAS</option><option value="Mauro Ivo DI CALOGERO">Mauro Ivo DI CALOGERO</option><option value="SEBASTIAN PEREZ PERUGORRIA">SEBASTIAN PEREZ PERUGORRIA</option><option value="SERGIO CAPECE">SERGIO CAPECE</option><option value="Santiago Hernan SOTO">Santiago Hernan SOTO</option><option value="Sebastian Matias PARODI">Sebastian Matias PARODI</option><option value="Tamara Denise MADERA">Tamara Denise MADERA</option><option value="Yanel DOMINGUEZ">Yanel DOMINGUEZ</option></select>
+      <select id="fOwn" onchange="renderList()" style="max-width:180px"><option value="">Owner</option><option value="Adrian Alberto ANGELONI">Adrian Alberto ANGELONI</option><option value="Adrian Gustavo RAMIREZ">Adrian Gustavo RAMIREZ</option><option value="Adriano D'AGOSTINO">Adriano D'AGOSTINO</option><option value="Aldo Claudio FIORINI">Aldo Claudio FIORINI</option><option value="Alejandro Angel PIGNATELLI">Alejandro Angel PIGNATELLI</option><option value="Alejandro LAGUTO">Alejandro LAGUTO</option><option value="Alejandro Martin CADOCHE WOLF">Alejandro Martin CADOCHE WOLF</option><option value="Anahi Del Valle MARIN MORAN">Anahi Del Valle MARIN MORAN</option><option value="Andrea SANCHEZ">Andrea SANCHEZ</option><option value="Andres PRUSCINO">Andres PRUSCINO</option><option value="Angelica STEINBACH">Angelica STEINBACH</option><option value="Bernardo COLLAZO BENITEZ">Bernardo COLLAZO BENITEZ</option><option value="Bruno GIGLI">Bruno GIGLI</option><option value="Carlos ALVAREZ LUGANO">Carlos ALVAREZ LUGANO</option><option value="Carlos GALLARDO">Carlos GALLARDO</option><option value="Carlos Gabriel LIZARZUAY">Carlos Gabriel LIZARZUAY</option><option value="David Sidney ARMSTRONG">David Sidney ARMSTRONG</option><option value="Diego Hernan FEIJOO">Diego Hernan FEIJOO</option><option value="Diego Luis SERVIERES">Diego Luis SERVIERES</option><option value="EDITH BASILICO">EDITH BASILICO</option><option value="Edgar DOUMA">Edgar DOUMA</option><option value="Emiliano Martin BODNARIN">Emiliano Martin BODNARIN</option><option value="Eva Maria Rosa CESPEDES">Eva Maria Rosa CESPEDES</option><option value="Facundo ALANIZ">Facundo ALANIZ</option><option value="Facundo Gabriel ALRIC">Facundo Gabriel ALRIC</option><option value="Facundo Nicolas MAHONA">Facundo Nicolas MAHONA</option><option value="Federico LOPEZ KUPERMAN">Federico LOPEZ KUPERMAN</option><option value="Fernando Martin GRANDOLI">Fernando Martin GRANDOLI</option><option value="Fernando Oscar BENITEZ">Fernando Oscar BENITEZ</option><option value="Florencia Melina CALVET">Florencia Melina CALVET</option><option value="Francisco BOGADO">Francisco BOGADO</option><option value="Francisco GOYENECHEA">Francisco GOYENECHEA</option><option value="GABRIELA GARCIA">GABRIELA GARCIA</option><option value="Gabriela ROSELLO">Gabriela ROSELLO</option><option value="Gaston CORSO">Gaston CORSO</option><option value="Gaston Christian ORDEN VILLALBA">Gaston Christian ORDEN VILLALBA</option><option value="Gonzalo Lorenzo ARUFE">Gonzalo Lorenzo ARUFE</option><option value="Gonzalo Martin LOPEZ">Gonzalo Martin LOPEZ</option><option value="Hector Pablo COGGIOLA">Hector Pablo COGGIOLA</option><option value="Hernan RIZZA">Hernan RIZZA</option><option value="J0123952">J0123952</option><option value="Jessica Elizabeth DE">Jessica Elizabeth DE</option><option value="Jesús Oscar GUILARTE ZABALA">Jesús Oscar GUILARTE ZABALA</option><option value="Jorge Luis MILLER">Jorge Luis MILLER</option><option value="Jorge Nicolas SANTANDER">Jorge Nicolas SANTANDER</option><option value="Jose Gabriel AZNAREZ">Jose Gabriel AZNAREZ</option><option value="L1006741">L1006741</option><option value="Laura REY">Laura REY</option><option value="Leandro Alberto MARZENIUK">Leandro Alberto MARZENIUK</option><option value="Leandro KOLTON">Leandro KOLTON</option><option value="Leonardo Alfredo GOMEZ">Leonardo Alfredo GOMEZ</option><option value="Lorena FAVALE">Lorena FAVALE</option><option value="Lucas Julian MARTIN">Lucas Julian MARTIN</option><option value="Luciano VIOTTO">Luciano VIOTTO</option><option value="Luis Atilio RIOLFO">Luis Atilio RIOLFO</option><option value="Luis Emilio UBERTI">Luis Emilio UBERTI</option><option value="Luis Sebastian CORREGIDOR">Luis Sebastian CORREGIDOR</option><option value="Marcelo Gustavo REINO">Marcelo Gustavo REINO</option><option value="Marcelo Javier RIOS">Marcelo Javier RIOS</option><option value="Maria Cecilia IRIGOITIA">Maria Cecilia IRIGOITIA</option><option value="Maria Claudia BORBOLLA">Maria Claudia BORBOLLA</option><option value="Maria Giselle PEREZ">Maria Giselle PEREZ</option><option value="Maria Ines AVILA">Maria Ines AVILA</option><option value="Maria Laura GERMANIER">Maria Laura GERMANIER</option><option value="Maria-Soledad DE GRAZIA">Maria-Soledad DE GRAZIA</option><option value="Mariana SAINZ TRAPAGA">Mariana SAINZ TRAPAGA</option><option value="Martin Cesar FERRANDO VILLOSLADA">Martin Cesar FERRANDO VILLOSLADA</option><option value="Martin SOUCARROS">Martin SOUCARROS</option><option value="Matias BERTOLA">Matias BERTOLA</option><option value="Maximiliano Pedro PAPONI">Maximiliano Pedro PAPONI</option><option value="Micaela CAMINO">Micaela CAMINO</option><option value="Miguel Angel ARAÑO">Miguel Angel ARAÑO</option><option value="Myriam MACCIERATESSI">Myriam MACCIERATESSI</option><option value="Natalia SCARICABAROZZI">Natalia SCARICABAROZZI</option><option value="Nicolas TORRES CABRERA">Nicolas TORRES CABRERA</option><option value="Pablo Ariel CHILLEMI">Pablo Ariel CHILLEMI</option><option value="Philippe JEANNET">Philippe JEANNET</option><option value="Pierre LECLERC">Pierre LECLERC</option><option value="Ramiro SAAVEDRA">Ramiro SAAVEDRA</option><option value="Ricardo Jose SERAFIN">Ricardo Jose SERAFIN</option><option value="Rodrigo Daniel BIANCHI">Rodrigo Daniel BIANCHI</option><option value="Rodrigo E DUARTE">Rodrigo E DUARTE</option><option value="SEBASTIAN PEREZ PERUGORRIA">SEBASTIAN PEREZ PERUGORRIA</option><option value="SILVIA CRISTINA DOMINGUEZ">SILVIA CRISTINA DOMINGUEZ</option><option value="Salvador CERVERA NOVO">Salvador CERVERA NOVO</option><option value="Salvador Emanuel GRIFFO">Salvador Emanuel GRIFFO</option><option value="Samuel Eduardo BECKMANN GLARDON">Samuel Eduardo BECKMANN GLARDON</option><option value="Santiago DE WAVRIN">Santiago DE WAVRIN</option><option value="Sebastian Matias PARODI">Sebastian Matias PARODI</option><option value="Sergio POZZONI">Sergio POZZONI</option><option value="Sébastien FOURNEL">Sébastien FOURNEL</option><option value="Walter FERNANDEZ FERNANDEZ">Walter FERNANDEZ FERNANDEZ</option><option value="Walter Ruben SCHMIDT">Walter Ruben SCHMIDT</option><option value="Yamil Aron GULMAN">Yamil Aron GULMAN</option></select>
+      <select id="fComp" onchange="renderList()" style="max-width:140px"><option value="">Completitud</option><option value="COMPLETO">✅ Completo</option><option value="PARCIAL">⚠️ Parcial</option><option value="PENDIENTE">❌ Pendiente</option></select>
+      <button class="btn btn-s btn-sm" onclick="clearContractFilters()">🧹 Limpiar filtros</button> <button class="btn btn-g btn-sm" onclick="importSapContractsModal()" style="margin-left:auto">📥 Importar SAP (ME3N)</button>
+      <button class="btn btn-d btn-sm" onclick="purgeDB()">🗑️ Vaciar Base</button>
+    </div>
+    <div id="tBody"></div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div id="vForm" class="vw">
+<div id="cForm" class="card">
+  <div class="fsec"><div class="fsh"><div class="fi t">📝</div><h2>Datos Generales<span>Información básica del contrato</span></h2></div>
+    <div class="fg">
+      <div class="fgrp"><label>N° Contrato <span class="req">*</span></label><input type="text" id="f_num" placeholder="4600012345"></div>
+      <div class="fgrp"><label>Contratista <span class="req">*</span></label><select id="f_cont"><option value="">Seleccionar contratista</option></select></div>
+      <div class="fgrp"><label>Tipo Actualización</label><input type="text" value="CONTRATO INICIAL" disabled></div>
+      <div class="fgrp"><label>Tipo Contrato <span class="req">*</span></label><select id="f_tipo" onchange="onTipoContratoChange()"><option value="">—</option><option>SERVICIO</option><option>OBRA</option></select></div>
+      <div class="fgrp"><label>Moneda <span class="req">*</span></label><select id="f_mon"><option value="">—</option><option>ARS</option><option>USD</option><option>EUR</option></select></div>
+      <div class="fgrp"><label>Monto Inicial <span class="req">*</span></label><input type="number" id="f_monto" step="0.01" min="0" placeholder="0" oninput="calcAnticipo()"></div>
+      
+      <!-- Campos OBRA: Anticipo -->
+      <div class="fgrp" id="fg_anticipo" style="display:none"><label>Anticipo (%)</label><input type="number" id="f_anticipoPct" step="0.01" min="0" max="100" placeholder="0" oninput="calcAnticipo()"></div>
+      <div class="fgrp" id="fg_anticipoMonto" style="display:none"><label>Anticipo (Monto)</label><input type="number" id="f_anticipoMonto" step="0.01" min="0" placeholder="0" disabled style="background:#f5f5f5"></div>
+      
+      <div class="fgrp"><label>Inicio <span class="req">*</span></label><input type="date" id="f_ini"></div>
+      <div class="fgrp"><label>Fin <span class="req">*</span></label><input type="date" id="f_fin"></div>
+      <div class="fgrp"><label>Responsable <span class="req">*</span></label><select id="f_resp"><option value="">—</option><option>Adrian OBINO</option><option>Alejo Nicolas CORDOBA</option><option>Ana Chiquinquira LEAÑEZ PERNALETE</option><option>Astrid Belen TERRIZZANO</option><option>Barbara Camila ALVAREZ OYARZO</option><option>Emilio Sebastian SAPORITO</option><option>Eugenia FERNANDEZ BOTTARO</option><option>Eugenia FERNANDEZ PUENTE</option><option>Fabiana Alejandra DI TATA</option><option>Federico Claudio VAZQUEZ FERNANDEZ</option><option>Fernando Javier PUENTES GALLY</option><option>Flavia SEGOVIA</option><option>Francisco Javier CACERES DIAZ</option><option>Gaston CORSO</option><option>Joaquin DELLA VEDOVA</option><option>Maria Silvia TRAVERSO</option><option>Maria Sol LEONARDIS</option><option>Martín ZALAZAR</option><option>Mauro ELIAS</option><option>Mauro Ivo DI CALOGERO</option><option>SEBASTIAN PEREZ PERUGORRIA</option><option>SERGIO CAPECE</option><option>Santiago Hernan SOTO</option><option>Sebastian Matias PARODI</option><option>Tamara Denise MADERA</option><option>Yanel DOMINGUEZ</option></select></div>
+      <div class="fgrp"><label>Base Tarifas <span class="req">*</span></label><input type="month" id="f_btar"></div>
+      <div class="fgrp"><label>Detalle Servicio <span class="req">*</span></label><input type="text" id="f_det" placeholder="Descripción"></div>
+      <div class="fgrp"><label>Plazo (meses) <span class="tip" data-t="Se calcula auto de las fechas">?</span></label><input type="number" id="f_plazo" disabled></div>
+    </div>
+  </div>
+  <div class="fsec"><div class="fsh"><div class="fi a">📐</div><h2>Cláusula de Redeterminación de Precios<span>Fórmula polinómica y gatillos de ajuste</span></h2></div>
+    <div class="fgrp" style="margin-bottom:16px"><label>¿Contiene fórmula polinómica?</label><div class="tw"><label class="tg"><input type="checkbox" id="f_hasPoly" onchange="onPolyToggle()"><span class="sl"></span></label><span class="tl" id="l_hasPoly">No</span></div></div>
+    <div id="polyWrap" style="display:none">
+      <div id="polyBox"></div>
+      <div class="poly-sum"><span class="ps-l">Σ Incidencias:</span><span class="ps-v mono" id="psVal">0.00</span><span class="ps-l" id="psNote" style="margin-left:6px">(debe sumar 1.00)</span></div>
+    </div>
+    <div style="margin-top:18px"><label style="font-size:11px;font-weight:600;color:var(--g700);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:10px">Gatillos de Redeterminación <span class="tip" data-t="El primero que se cumpla gatilla la actualización">?</span></label>
+      <div class="trig-row"><div class="trig-letter">A</div><div class="trig-desc">Actualización de Mano de Obra según CCT asociado al contrato</div><div class="trig-input"><label class="tg"><input type="checkbox" id="f_trigA" onchange="document.getElementById('l_trigA').textContent=this.checked?'Sí':'No'"><span class="sl"></span></label><span class="tl" id="l_trigA">No</span></div></div>
+      <div class="trig-row"><div class="trig-letter">B</div><div class="trig-desc">Variación acumulada desde la última redeterminación</div><div class="trig-input"><label class="tg"><input type="checkbox" id="f_trigB" onchange="onTrigBToggle()"><span class="sl"></span></label><span class="tl" id="l_trigB">No</span><div id="trigB_pct" style="display:none;align-items:center;gap:5px"><span>≥</span><input type="number" id="f_trigBpct" step="0.1" min="0" placeholder="0" style="width:75px"><span>%</span></div></div></div>
+      <div class="trig-row"><div class="trig-letter">C</div><div class="trig-desc">Transcurridos X meses desde la última redeterminación</div><div class="trig-input"><label class="tg"><input type="checkbox" id="f_trigC" onchange="onTrigCToggle()"><span class="sl"></span></label><span class="tl" id="l_trigC">No</span><div id="trigC_mes" style="display:none;align-items:center;gap:5px"><input type="number" id="f_trigCmes" min="1" placeholder="0" style="width:75px"><span>meses</span></div></div></div>
+    </div>
+  </div>
+  <div class="fsec"><div class="fsh"><div class="fi a">⚖️</div><h2>Tipo de Contratación<span>Adjudicación</span></h2></div>
+    <div class="fg">
+      <div class="fgrp"><label>Tipo <span class="req">*</span></label><select id="f_tcontr" onchange="onContrCh()"><option value="">—</option><option>DIRECTA</option><option>RFQ MAIL</option><option>RFQ ARIBA</option></select></div>
+      <div class="fgrp"><label>CC Date</label><input type="date" id="f_cc"></div>
+    </div>
+  </div>
+  <div class="cond" id="secRfq"><div class="cond-tag">Datos RFQ</div><div class="fg"><div class="fgrp"><label>Cant. Ofertas</label><input type="number" id="f_cof" min="0"></div><div class="fgrp"><label>Oferentes</label><input type="text" id="f_of"></div></div></div>
+  <div class="cond" id="secAr"><div class="cond-tag">Datos Ariba</div><div class="fg"><div class="fgrp"><label>ID Ariba <span class="req">*</span></label><input type="text" id="f_ariba"></div><div class="fgrp"><label>Fecha Evento</label><input type="date" id="f_fev"></div></div></div>
+  <div class="fsec"><div class="fsh"><div class="fi g">✅</div><h2>Compliance<span>Verificaciones</span></h2></div>
+    <div class="fg4">
+      <div class="fgrp"><label>Due Diligence</label><div class="tw"><label class="tg"><input type="checkbox" id="f_dd" checked><span class="sl"></span></label><span class="tl" id="l_dd">Sí</span></div></div>
+      <div class="fgrp"><label>Pre-Risk</label><div class="tw"><label class="tg"><input type="checkbox" id="f_pr" checked><span class="sl"></span></label><span class="tl" id="l_pr">Sí</span></div></div>
+      <div class="fgrp"><label>Sequana</label><div class="tw"><label class="tg"><input type="checkbox" id="f_sq" checked><span class="sl"></span></label><span class="tl" id="l_sq">Sí</span></div></div>
+      <div class="fgrp"><label>Derogación</label><div class="tw"><label class="tg"><input type="checkbox" id="f_dg"><span class="sl"></span></label><span class="tl" id="l_dg">No</span></div></div>
+    </div>
+  </div>
+  <div class="fsec"><div class="fsh"><div class="fi t">👥</div><h2>Responsables<span>Personas del contrato</span></h2></div>
+    <div class="fg">
+      <div class="fgrp"><label>Resp. Técnico <span class="req">*</span></label><select id="f_rtec"><option value="">—</option><option>Adrian Alberto ANGELONI</option><option>Adrian Gustavo RAMIREZ</option><option>Adrian OBINO</option><option>Adriano D'AGOSTINO</option><option>Aldo Claudio FIORINI</option><option>Alejandro Angel PIGNATELLI</option><option>Alejandro LAGUTO</option><option>Alejandro Martin CADOCHE WOLF</option><option>Alejo Nicolas CORDOBA</option><option>Ana Chiquinquira LEAÑEZ PERNALETE</option><option>Anahi Del Valle MARIN MORAN</option><option>Andrea SANCHEZ</option><option>Andres PRUSCINO</option><option>Angelica STEINBACH</option><option>Astrid Belen TERRIZZANO</option><option>Barbara Camila ALVAREZ OYARZO</option><option>Bernardo COLLAZO BENITEZ</option><option>Bruno GIGLI</option><option>Carlos ALVAREZ LUGANO</option><option>Carlos GALLARDO</option><option>Carlos Gabriel LIZARZUAY</option><option>David Sidney ARMSTRONG</option><option>Diego Hernan FEIJOO</option><option>Diego Luis SERVIERES</option><option>EDITH BASILICO</option><option>Edgar DOUMA</option><option>Emiliano Martin BODNARIN</option><option>Emilio Sebastian SAPORITO</option><option>Eugenia FERNANDEZ BOTTARO</option><option>Eugenia FERNANDEZ PUENTE</option><option>Eva Maria Rosa CESPEDES</option><option>Fabiana Alejandra DI TATA</option><option>Facundo ALANIZ</option><option>Facundo Gabriel ALRIC</option><option>Facundo Nicolas MAHONA</option><option>Federico Claudio VAZQUEZ FERNANDEZ</option><option>Federico LOPEZ KUPERMAN</option><option>Fernando Javier PUENTES GALLY</option><option>Fernando Martin GRANDOLI</option><option>Fernando Oscar BENITEZ</option><option>Flavia SEGOVIA</option><option>Florencia Melina CALVET</option><option>Francisco BOGADO</option><option>Francisco GOYENECHEA</option><option>Francisco Javier CACERES DIAZ</option><option>GABRIELA GARCIA</option><option>Gabriela ROSELLO</option><option>Gaston CORSO</option><option>Gaston Christian ORDEN VILLALBA</option><option>Gonzalo Lorenzo ARUFE</option><option>Gonzalo Martin LOPEZ</option><option>Hector Pablo COGGIOLA</option><option>Hernan RIZZA</option><option>J0123952</option><option>Jefe de Base</option><option>Jefe de Obras Civiles</option><option>Jessica Elizabeth DE</option><option>Jesús Oscar GUILARTE ZABALA</option><option>Joaquin DELLA VEDOVA</option><option>Jorge Luis MILLER</option><option>Jorge Nicolas SANTANDER</option><option>Jose Gabriel AZNAREZ</option><option>L1006741</option><option>Laura REY</option><option>Leandro Alberto MARZENIUK</option><option>Leandro KOLTON</option><option>Leonardo Alfredo GOMEZ</option><option>Lorena FAVALE</option><option>Lucas Julian MARTIN</option><option>Luciano VIOTTO</option><option>Luis Atilio RIOLFO</option><option>Luis Emilio UBERTI</option><option>Luis Sebastian CORREGIDOR</option><option>Marcelo Gustavo REINO</option><option>Marcelo Javier RIOS</option><option>Maria Cecilia IRIGOITIA</option><option>Maria Claudia BORBOLLA</option><option>Maria Giselle PEREZ</option><option>Maria Ines AVILA</option><option>Maria Laura GERMANIER</option><option>Maria Silvia TRAVERSO</option><option>Maria Sol LEONARDIS</option><option>Maria-Soledad DE GRAZIA</option><option>Mariana SAINZ TRAPAGA</option><option>Martin Cesar FERRANDO VILLOSLADA</option><option>Martin SOUCARROS</option><option>Martín ZALAZAR</option><option>Matias BERTOLA</option><option>Mauro ELIAS</option><option>Mauro Ivo DI CALOGERO</option><option>Maximiliano Pedro PAPONI</option><option>Micaela CAMINO</option><option>Miguel Angel ARAÑO</option><option>Myriam MACCIERATESSI</option><option>Natalia SCARICABAROZZI</option><option>Nicolas TORRES CABRERA</option><option>Pablo Ariel CHILLEMI</option><option>Philippe JEANNET</option><option>Pierre LECLERC</option><option>Ramiro SAAVEDRA</option><option>Ricardo Jose SERAFIN</option><option>Rodrigo Daniel BIANCHI</option><option>Rodrigo E DUARTE</option><option>SEBASTIAN PEREZ PERUGORRIA</option><option>SERGIO CAPECE</option><option>SILVIA CRISTINA DOMINGUEZ</option><option>Salvador CERVERA NOVO</option><option>Salvador Emanuel GRIFFO</option><option>Samuel Eduardo BECKMANN GLARDON</option><option>Santiago DE WAVRIN</option><option>Santiago Hernan SOTO</option><option>Sebastian Matias PARODI</option><option>Sergio POZZONI</option><option>Superintendente de Logistica</option><option>Sébastien FOURNEL</option><option>Tamara Denise MADERA</option><option>Walter FERNANDEZ FERNANDEZ</option><option>Walter Ruben SCHMIDT</option><option>Yamil Aron GULMAN</option><option>Yanel DOMINGUEZ</option></select></div>
+      <div class="fgrp"><label>Tipo Cambio <span class="req">*</span></label><input type="number" id="f_tc" step="0.01" min="1" placeholder="1.00" value="1"></div>
+      <div class="fgrp"><label>Contract Owner</label><select id="f_own"><option value="">—</option><option>Adrian Alberto ANGELONI</option><option>Adrian Gustavo RAMIREZ</option><option>Adriano D'AGOSTINO</option><option>Aldo Claudio FIORINI</option><option>Alejandro Angel PIGNATELLI</option><option>Alejandro LAGUTO</option><option>Alejandro Martin CADOCHE WOLF</option><option>Anahi Del Valle MARIN MORAN</option><option>Andrea SANCHEZ</option><option>Andres PRUSCINO</option><option>Angelica STEINBACH</option><option>Bernardo COLLAZO BENITEZ</option><option>Bruno GIGLI</option><option>Carlos ALVAREZ LUGANO</option><option>Carlos GALLARDO</option><option>Carlos Gabriel LIZARZUAY</option><option>David Sidney ARMSTRONG</option><option>Diego Hernan FEIJOO</option><option>Diego Luis SERVIERES</option><option>EDITH BASILICO</option><option>Edgar DOUMA</option><option>Emiliano Martin BODNARIN</option><option>Eva Maria Rosa CESPEDES</option><option>Facundo ALANIZ</option><option>Facundo Gabriel ALRIC</option><option>Facundo Nicolas MAHONA</option><option>Federico LOPEZ KUPERMAN</option><option>Fernando Martin GRANDOLI</option><option>Fernando Oscar BENITEZ</option><option>Florencia Melina CALVET</option><option>Francisco BOGADO</option><option>Francisco GOYENECHEA</option><option>GABRIELA GARCIA</option><option>Gabriela ROSELLO</option><option>Gaston CORSO</option><option>Gaston Christian ORDEN VILLALBA</option><option>Gonzalo Lorenzo ARUFE</option><option>Gonzalo Martin LOPEZ</option><option>Hector Pablo COGGIOLA</option><option>Hernan RIZZA</option><option>J0123952</option><option>Jessica Elizabeth DE</option><option>Jesús Oscar GUILARTE ZABALA</option><option>Jorge Luis MILLER</option><option>Jorge Nicolas SANTANDER</option><option>Jose Gabriel AZNAREZ</option><option>L1006741</option><option>Laura REY</option><option>Leandro Alberto MARZENIUK</option><option>Leandro KOLTON</option><option>Leonardo Alfredo GOMEZ</option><option>Lorena FAVALE</option><option>Lucas Julian MARTIN</option><option>Luciano VIOTTO</option><option>Luis Atilio RIOLFO</option><option>Luis Emilio UBERTI</option><option>Luis Sebastian CORREGIDOR</option><option>Marcelo Gustavo REINO</option><option>Marcelo Javier RIOS</option><option>Maria Cecilia IRIGOITIA</option><option>Maria Claudia BORBOLLA</option><option>Maria Giselle PEREZ</option><option>Maria Ines AVILA</option><option>Maria Laura GERMANIER</option><option>Maria-Soledad DE GRAZIA</option><option>Mariana SAINZ TRAPAGA</option><option>Martin Cesar FERRANDO VILLOSLADA</option><option>Martin SOUCARROS</option><option>Matias BERTOLA</option><option>Maximiliano Pedro PAPONI</option><option>Micaela CAMINO</option><option>Miguel Angel ARAÑO</option><option>Myriam MACCIERATESSI</option><option>Natalia SCARICABAROZZI</option><option>Nicolas TORRES CABRERA</option><option>Pablo Ariel CHILLEMI</option><option>Philippe JEANNET</option><option>Pierre LECLERC</option><option>Ramiro SAAVEDRA</option><option>Ricardo Jose SERAFIN</option><option>Rodrigo Daniel BIANCHI</option><option>Rodrigo E DUARTE</option><option>SEBASTIAN PEREZ PERUGORRIA</option><option>SILVIA CRISTINA DOMINGUEZ</option><option>Salvador CERVERA NOVO</option><option>Salvador Emanuel GRIFFO</option><option>Samuel Eduardo BECKMANN GLARDON</option><option>Santiago DE WAVRIN</option><option>Sebastian Matias PARODI</option><option>Sergio POZZONI</option><option>Sébastien FOURNEL</option><option>Walter FERNANDEZ FERNANDEZ</option><option>Walter Ruben SCHMIDT</option><option>Yamil Aron GULMAN</option></select></div>
+      <div class="fgrp"><label>Asset</label><select id="f_asset"><option value="">—</option><option>NQN</option><option>TDF</option><option>NQN + TDF</option></select></div>
+      <div class="fgrp"><label>Contacto Proveedor <span class="req">*</span></label><input type="text" id="f_cprov" placeholder="Nombre contacto"></div>
+      <div class="fgrp"><label>N° Vendor</label><input type="text" id="f_vend"></div>
+      <div class="fgrp"><label>FAX</label><input type="text" id="f_fax"></div>
+    </div>
+  </div>
+  <div class="fsec"><div class="fsh"><div class="fi t">📎</div><h2>Adjuntos & Comentarios</h2></div>
+    <div class="fg2">
+      <div class="fgrp"><label>Adjuntos</label><div class="fzone" id="fz" onclick="document.getElementById('fIn').click()"><div class="fzi">📁</div><div class="fzt">Arrastrá o hacé <strong>clic</strong></div></div><input type="file" id="fIn" multiple style="display:none" onchange="handleFiles(this.files)"><div class="fl" id="fList"></div></div>
+      <div class="fgrp"><label>Comentarios</label><textarea id="f_com" placeholder="Observaciones..." style="min-height:140px"></textarea></div>
+    </div>
+  </div>
+  <div class="ffr"><button type="button" class="btn btn-s" onclick="cancelForm()">✕ Cancelar</button><div style="display:flex;gap:8px"><button type="button" class="btn btn-s" onclick="resetForm()">🔄 Limpiar</button><button type="button" class="btn btn-p" onclick="guardar()">💾 Guardar Contrato</button></div></div>
+</div>
+</div>
+
+<!-- DETAIL -->
+<div id="vDet" class="vw"><div id="detCard"></div></div>
+
+<!-- ME2N LIST -->
+<div id="vMe2n" class="vw">
+  <div class="card">
+    <div class="thdr"><h2>Purchase Orders — ME2N</h2><span class="tcnt" id="poLcnt">0</span></div>
+    <div class="tfl">
+      <input type="text" id="poSrch" placeholder="Buscar N° contrato o N° PO..." oninput="renderMe2n()" style="flex:1;max-width:320px">
+      <select id="poPlant" onchange="renderMe2n()"><option value="">Todas las Plants</option></select>
+      <button class="btn btn-p btn-sm" onclick="document.getElementById('me2nXlsIn').click()" style="margin-left:auto">📤 Actualizar Base ME2N</button>
+      <button class="btn btn-d btn-sm" onclick="purgeMe2n()">🗑️ Vaciar ME2N</button>
+      <input type="file" id="me2nXlsIn" accept=".xlsx,.xls" style="display:none" onchange="importMe2n(this)">
+    </div>
+    <div id="poBody"></div>
+  </div>
+</div>
+
+<!-- ME2N CONTRACT DETAIL -->
+<div id="vMe2nDet" class="vw"><div id="poDetCard"></div></div>
+
+
+<!-- ══ ÍNDICES VIEW ══════════════════════════════════════════════════ -->
+<div id="vIdx" class="vw">
+  <!-- Selector global + dashboard row -->
+  <div id="idxDashTop"></div>
+  <!-- Detail panel (hidden by default) -->
+  <div id="idxDetPanel" style="display:none"></div>
+  <!-- Cards grid -->
+  <div id="idxCardsGrid"></div>
+  <!-- New index modal backdrop -->
+  <div id="idxModalBack" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center">
+    <div id="idxModalBox" style="background:var(--w);border-radius:var(--radl);box-shadow:0 20px 60px rgba(0,0,0,.3);width:520px;max-width:95vw;max-height:92vh;overflow-y:auto"></div>
+  </div>
+</div>
+
+<!-- ══ LICITACIONES VIEW ════════════════════════════════════════════════ -->
+<div id="vLicit" class="vw">
+  <div id="licitList"></div>
+  <div id="licitDet" style="display:none"></div>
+  <!-- Modal -->
+  <div id="licitModalBack" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center">
+    <div id="licitModalBox" style="background:var(--w);border-radius:var(--radl);box-shadow:0 20px 60px rgba(0,0,0,.3);width:680px;max-width:96vw;max-height:94vh;overflow-y:auto"></div>
+  </div>
+</div>
+
+<!-- ══ PROVEEDORES VIEW ═══════════════════════════════════════════════ -->
+<div id="vProv" class="vw">
+  <div id="provList"></div>
+  <div id="provDet" style="display:none"></div>
+  <div id="provModalBack" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center">
+    <div id="provModalBox" style="background:var(--w);border-radius:var(--radl);box-shadow:0 20px 60px rgba(0,0,0,.3);width:640px;max-width:96vw;max-height:94vh;overflow-y:auto"></div>
+  </div>
+</div>
+</div></main></div>
+<div class="toast" id="toast"></div>
+
+<!-- External Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script>
+
+<!-- Modular Architecture -->
+<script src="js/config.js?v=221"></script>
+<script src="js/storage.js?v=221"></script>
+<script src="js/auth.js?v=221"></script>
+<script src="js/ui.js?v=221"></script>
+<script src="js/bundle.js?v=221"></script>
+<script src="js/app.js?v=221"></script>
+</body>
+</html>
